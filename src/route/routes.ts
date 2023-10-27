@@ -28,17 +28,44 @@ router.get('/productos/precio-mayor-cien', (_: Request, res: Response) => {
 });
 
 //3
+router.put('/productos/modifiar/:modelo', (req: Request, res: Response) => {
+  const { modelo } = req.params;
+  const { nombre, precio, paisOrigen } = req.body;
+  
+  let productoModificado = false;
+
+  for (let i = 0; i < productos.length; i++) {
+    if (productos[i].modelo === modelo) {
+      productos[i].nombre = nombre || productos[i].nombre;
+      productos[i].precio = precio || productos[i].precio;
+      productos[i].paisOrigen = paisOrigen || productos[i].paisOrigen;
+      productoModificado = true;
+      break;
+    }
+  }
+
+  if (productoModificado) {
+    res.send('Producto modificado correctamente');
+  } else {
+    res.status(404).send('Producto no encontrado');
+  }
+});
 
 //4
-router.delete('/productos/:modelo', (req: Request, res: Response) => {
+router.get('/productos/eliminar/:modelo', (req: Request, res: Response) => {
   const { modelo } = req.params;
-  const longitud = productos.length;
+  const longitud = productos.length
 
   productos = productos.filter(producto => producto.modelo !== modelo);
+  console.log('funcionando');
+  
+
   if (productos.length === longitud) {
     res.status(404).send('Producto no encontrado');
+    console.log('Producto no encontrado');
   } else {
     res.send('Producto eliminado');
+    console.log('Producto eliminado');
   }
 });
 
@@ -67,7 +94,7 @@ router.get('/productos/por-precio/:precio', (req: Request, res: Response) => {
 });
 
 //7
-router.post('/productos', (req: Request, res: Response) => {
+router.post('/productos/agregar', (req: Request, res: Response) => {
   const { nombre, modelo, precio, paisOrigen } = req.body;
   if (nombre && modelo && precio && paisOrigen) {
     const nuevoProducto = { nombre, modelo, precio, paisOrigen };
