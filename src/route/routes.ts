@@ -99,7 +99,7 @@ router.post('/productos/agregar', (req: Request, res: Response) => {
   if (nombre && modelo && precio && paisOrigen) {
     const nuevoProducto = { nombre, modelo, precio, paisOrigen };
     productos.push(nuevoProducto);
-    res.send('Producto creado');
+    res.status(201).send(productos);
   } else {
     res.status(404).send('Faltan campos para crear el producto');
   }
