@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Producto {
+export class Usuarios {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -9,14 +9,14 @@ export class Producto {
   nombre: string;
 
   @Column()
-  precio: number;
+  correo: string;
 
   @Column()
-  caracteristicas: string;
+  contraseña: string;
 
-  constructor(nombre:string, precio:number, caracteristicas:string ){
+  constructor(nombre: string, correo: string, contraseña: string) {
     this.nombre = nombre;
-    this.precio = precio;
-    this.caracteristicas = caracteristicas
+    this.correo = correo;
+    this.contraseña = contraseña;
   }
 }

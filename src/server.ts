@@ -1,13 +1,13 @@
 import express from 'express';
 import { AppDataSource } from './persistance/config';
-import router from './router/routes';
+import router from './route/routes';
 
 const app = express();
 const PORT = 8080;
 
 app.use(express.json());
 
-app.use('/api', router);
+app.use('/', router);
 
 AppDataSource.initialize().then(() => {
   app.listen(PORT, () => {

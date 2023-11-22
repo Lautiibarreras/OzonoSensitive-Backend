@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import { Producto } from './entidades/Producto';
+import { Producto } from './entidades/productos';
 
 export class Db {
   constructor() {}
