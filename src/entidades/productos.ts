@@ -14,9 +14,14 @@ export default class Producto {
   @Column()
   caracteristicas: string;
 
-    constructor(nombre:string, precio:number, caracteristicas:string ){
+  @Column()
+  img: string
+
+    constructor(nombre:string, precio:number, caracteristicas:string, img: string){
         this.nombre = nombre;
         this.precio = precio;
         this.caracteristicas = caracteristicas
+        this.img = img;
+
   }
 }
