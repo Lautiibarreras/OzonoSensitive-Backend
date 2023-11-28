@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Producto {
+export default class Producto {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -14,9 +14,9 @@ export class Producto {
   @Column()
   caracteristicas: string;
 
-  constructor(nombre:string, precio:number, caracteristicas:string ){
-    this.nombre = nombre;
-    this.precio = precio;
-    this.caracteristicas = caracteristicas
+    constructor(nombre:string, precio:number, caracteristicas:string ){
+        this.nombre = nombre;
+        this.precio = precio;
+        this.caracteristicas = caracteristicas
   }
 }

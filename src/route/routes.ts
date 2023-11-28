@@ -1,10 +1,14 @@
-import express from 'express';
-import { getAllProductos, realizarCompra } from '../controller/controller';
+import { Router } from 'express';
+import { ingresarUsuario, registrarUsuario, registrarCarrito, obtenerProductos } from '../controller/controller';
 
-const router = express.Router();
+const router: Router = Router();
 
-router.get('/productos', getAllProductos);
+router.post('/login/try', ingresarUsuario);
 
-router.post('/compra', realizarCompra);
+router.post('/register/success', registrarUsuario);
+
+router.post('/carrito', registrarCarrito);
+
+router.get('/productos', obtenerProductos);
 
 export default router;

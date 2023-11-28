@@ -1,23 +1,24 @@
-import 'reflect-metadata'
-import { DataSource } from 'typeorm';
-import { Producto } from './entidades/productos';
+import "reflect-metadata";
+import { createConnection } from "typeorm";
+import Producto from './entidades/productos'
+import Usuario from './entidades/usuarios';
+import Carrito from './entidades/carrito';
 
-export const AppDataSource = new DataSource({
+createConnection({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '1234',
+    password: '12345678',
     database: 'ozonosensitive',
-    entities: [Producto],
     synchronize: true,
     logging: true,
- });
-
- AppDataSource.initialize()
-    .then(async() => {
-
-        const repoProductos = AppDataSource.manager.getRepository(Producto);
+    entities: [Producto, Usuario, Carrito],
+    subscribers: [],
+    migrations: []
+})
+    .then(async (connection) => {
+        const repoProductos = connection.getRepository(Producto);
         const porductosExiste = await repoProductos.find();
         if (porductosExiste.length === 0){
             const producto1 = new Producto("Ozono1", 100, "Ozono casa 1");
@@ -28,4 +29,10 @@ export const AppDataSource = new DataSource({
 
             await repoProductos.save([producto1,producto2,producto3,producto4,producto5])
         }
-    })
+        
+        console.log("Base iniciada");
+
+        await connection.close();
+    }).catch((error) => {
+        console.log("Error al inicializar la base: ", error)
+    });
