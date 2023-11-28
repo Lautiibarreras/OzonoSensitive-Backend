@@ -3,9 +3,9 @@ import { ingresarUsuario, registrarUsuario, registrarCarrito, obtenerProductos }
 
 const router: Router = Router();
 
-router.post('/login/try', ingresarUsuario);
+router.post('/login', ingresarUsuario);
 
-router.post('/register/success', registrarUsuario);
+router.post('/register', registrarUsuario);
 
 router.post('/carrito', registrarCarrito);
 
