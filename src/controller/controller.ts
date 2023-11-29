@@ -11,7 +11,7 @@ export const obtenerConexionBaseDatos = async (): Promise<Connection> => {
   if (!conexion || !conexion.isConnected) {
     conexion = await createConnection();
   }
-  return conexion;
+  return conexion; 
 };
 
 export const registrarUsuario = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ export const registrarUsuario = async (req: Request, res: Response) => {
         await conexion.manager.save(nuevoUsuario);
         await conexion.close();
 
-        return res.status(201).json({ mensaje: 'Usuario registrado exitosamente' });
+        return res.status(201).json({ mensaje: 'Usuario registrado' });
       } catch (error) {
         console.error('Error al registrar el usuario:', error);
         return res.status(500).json({ error: 'Error al conectar con la base de datos' });
@@ -43,7 +43,7 @@ export const registrarUsuario = async (req: Request, res: Response) => {
     }
   } catch (err) {
     console.error('Error al registrar el usuario:', err);
-    return res.status(500).json({ error: 'Error interno del servidor' });
+    return res.status(500).json({ error: 'Error del servidor' });
   }
 };
 
@@ -85,14 +85,14 @@ export const registrarCarrito = async (req: Request, res: Response) => {
 
     const entidadCarrito = new Carrito(carritoJsonificado);
 
-    await conexion.manager.save(Carrito, entidadCarrito);
+    await conexion.manager.save(entidadCarrito);
     await conexion.close();
 
-    return res.status(201).json({ mensaje: 'Carrito registrado exitosamente' });
+    return res.status(201).json({ mensaje: 'Carrito registrado' });
 
   } catch (err) {
     console.error('Error al registrar el carrito:', err);
-    return res.status(500).json({ error: 'Error interno del servidor' });
+    return res.status(500).json({ error: 'Error del servidor' });
   }
 };
 
@@ -104,7 +104,7 @@ export const obtenerProductos = async (_: any, res: Response) => {
 
     await conexion.close();
 
-    res.json(productosExistente);
+    res.json(productosExistente); 
   } catch (error) {
     console.error('Error al obtener productos:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
