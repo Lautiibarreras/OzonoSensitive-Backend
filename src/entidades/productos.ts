@@ -15,7 +15,7 @@ export default class Producto {
   caracteristicas: string;
 
   @Column()
-  img: string
+  img: string 
 
     constructor(nombre:string, precio:number, caracteristicas:string, img: string){
         this.nombre = nombre;
